@@ -84,12 +84,26 @@ bool FPProc::OpenDocument(const femm::FemmProblem &problem, const FSolver &solve
             blocklist[i].J = 0.;
         } else if (circproplist[circuit].Case == 0) {
             blocklist[i].Case = 0;
-            blocklist[i].dVolts = circproplist[circuit].dVolts;
+            // dV is the solved gradient (written to .ans); dVolts is only the input
+            blocklist[i].dVolts = circproplist[circuit].dV;
         } else {
             blocklist[i].Case = 1;
             blocklist[i].J = circproplist[circuit].J;
         }
     }
+
+    // The solver expands each series circuit into one sub-circuit per block
+    // label (Amps*Turns) and relabels everything as parallel. Per-block
+    // Case/J above come from those sub-circuits; circuit properties (current,
+    // voltage, flux linkage) must see the user's circuits, as when reading a
+    // .ans file. Map the labels back and restore the original circuit types.
+    const int numOrig = solver.NumCircPropsOrig;
+    for (auto &block : blocklist)
+        if (block.InCircuit >= numOrig)
+            block.InCircuit = circproplist[block.InCircuit].OrigCirc;
+    circproplist.resize(numOrig);
+    for (int k = 0; k < numOrig && k < static_cast<int>(problem.circproplist.size()); ++k)
+        circproplist[k].CircType = problem.circproplist[k]->CircType;
 
     return finalizeSolution();
 }

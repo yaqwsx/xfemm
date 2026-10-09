@@ -1,0 +1,174 @@
+[Format] = 4.0
+[Frequency] = 0.0
+[Precision] = 1e-08
+[MinAngle] = 30
+[Depth] = 100.0
+[LengthUnits] = millimeters
+[ProblemType] = planar
+[Coordinates] = cartesian
+[ACSolver] = 0
+[Comment] = "femm2d"
+[PointProps] = 0
+[BdryProps] = 2
+<BeginBdry>
+<BdryName> = "periodic_x"
+<BdryType> = 4
+<A_0> = 0
+<A_1> = 0
+<A_2> = 0
+<Phi> = 0
+<c0> = 0
+<c0i> = 0
+<c1> = 0
+<c1i> = 0
+<Mu_ssd> = 0
+<Sigma_ssd> = 0
+<EndBdry>
+<BeginBdry>
+<BdryName> = "periodic_y"
+<BdryType> = 4
+<A_0> = 0
+<A_1> = 0
+<A_2> = 0
+<Phi> = 0
+<c0> = 0
+<c0i> = 0
+<c1> = 0
+<c1i> = 0
+<Mu_ssd> = 0
+<Sigma_ssd> = 0
+<EndBdry>
+[BlockProps] = 4
+<BeginBlock>
+<BlockName> = "Air"
+<Mu_x> = 1.0
+<Mu_y> = 1.0
+<H_c> = 0.0
+<H_cAngle> = 0
+<J_re> = 0
+<J_im> = 0
+<Sigma> = 0.0
+<d_lam> = 0.0
+<Phi_h> = 0
+<Phi_hx> = 0
+<Phi_hy> = 0
+<LamType> = 0
+<LamFill> = 1
+<NStrands> = 0
+<WireD> = 0
+<BHPoints> = 0
+<EndBlock>
+<BeginBlock>
+<BlockName> = "NdFeB_0.0"
+<Mu_x> = 1.05
+<Mu_y> = 1.05
+<H_c> = 890000.0
+<H_cAngle> = 0
+<J_re> = 0
+<J_im> = 0
+<Sigma> = 0.0
+<d_lam> = 0.0
+<Phi_h> = 0
+<Phi_hx> = 0
+<Phi_hy> = 0
+<LamType> = 0
+<LamFill> = 1
+<NStrands> = 0
+<WireD> = 0
+<BHPoints> = 0
+<EndBlock>
+<BeginBlock>
+<BlockName> = "NdFeB_180.0"
+<Mu_x> = 1.05
+<Mu_y> = 1.05
+<H_c> = 890000.0
+<H_cAngle> = 0
+<J_re> = 0
+<J_im> = 0
+<Sigma> = 0.0
+<d_lam> = 0.0
+<Phi_h> = 0
+<Phi_hx> = 0
+<Phi_hy> = 0
+<LamType> = 0
+<LamFill> = 1
+<NStrands> = 0
+<WireD> = 0
+<BHPoints> = 0
+<EndBlock>
+<BeginBlock>
+<BlockName> = "Copper"
+<Mu_x> = 1.0
+<Mu_y> = 1.0
+<H_c> = 0.0
+<H_cAngle> = 0
+<J_re> = 0
+<J_im> = 0
+<Sigma> = 58.0
+<d_lam> = 0.0
+<Phi_h> = 0
+<Phi_hx> = 0
+<Phi_hy> = 0
+<LamType> = 0
+<LamFill> = 1
+<NStrands> = 0
+<WireD> = 0
+<BHPoints> = 0
+<EndBlock>
+[CircuitProps] = 1
+<BeginCircuit>
+<CircuitName> = "coil"
+<TotalAmps_re> = 2.0
+<TotalAmps_im> = 0
+<CircuitType> = 1
+<EndCircuit>
+[NumPoints] = 20
+50.0	-50.0	0	0
+50.0	50.0	0	0
+-50.0	50.0	0	0
+-50.0	-50.0	0	0
+-2.5	-5.0	0	0
+-2.5	5.0	0	0
+-12.5	5.0	0	0
+-12.5	-5.0	0	0
+12.5	-5.0	0	0
+12.5	5.0	0	0
+2.5	5.0	0	0
+2.5	-5.0	0	0
+-2.0	20.0	0	0
+-2.0	25.0	0	0
+-10.0	25.0	0	0
+-10.0	20.0	0	0
+10.0	20.0	0	0
+10.0	25.0	0	0
+2.0	25.0	0	0
+2.0	20.0	0	0
+[NumSegments] = 20
+0	1	-1	1	0	0
+0	3	-1	2	0	0
+1	2	-1	2	0	0
+2	3	-1	1	0	0
+4	5	-1	0	0	0
+4	7	-1	0	0	0
+5	6	-1	0	0	0
+6	7	-1	0	0	0
+8	9	-1	0	0	0
+8	11	-1	0	0	0
+9	10	-1	0	0	0
+10	11	-1	0	0	0
+12	13	-1	0	0	0
+12	15	-1	0	0	0
+13	14	-1	0	0	0
+14	15	-1	0	0	0
+16	17	-1	0	0	0
+16	19	-1	0	0	0
+17	18	-1	0	0	0
+18	19	-1	0	0	0
+[NumArcSegments] = 0
+[NumHoles] = 0
+[NumBlockLabels] = 5
+-7.5	0.0	2	1.0	0	0	1	1	0
+7.5	0.0	3	1.0	0	180.0	2	1	0
+-6.0	22.5	4	4.0	1	0	3	1	0
+6.0	22.5	4	4.0	1	0	4	-1	0
+-31.25	0.0	1	4.0	0	0	0	1	0
