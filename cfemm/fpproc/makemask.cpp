@@ -151,7 +151,17 @@ bool FPProc::MakeMask()
 		}
 	}
 
-	// Set all nodes in a selected block equal to 1;
+	// Set all nodes in unselected non-air blocks to 0, then all nodes in a
+	// selected block to 1. Two passes, so that a node shared by both always
+	// ends up 1 and the consistency check below catches an invalid selection
+	// regardless of the element order.
+	for(i=0;i<NumEls;i++)
+	{
+		if(!blocklist[meshelem[i].lbl].IsSelected && lblflag[meshelem[i].lbl]!=0)
+		{
+			for(j=0;j<3;j++) L->solution()[meshelem[i].p[j]]=0;
+		}
+	}
 	for(i=0;i<NumEls;i++)
 	{
 		if(blocklist[meshelem[i].lbl].IsSelected)
@@ -159,10 +169,6 @@ bool FPProc::MakeMask()
 			for(j=0;j<3;j++){
 				L->solution()[meshelem[i].p[j]]=1;
 			}
-		}
-		else if(lblflag[meshelem[i].lbl]!=0)
-		{
-			for(j=0;j<3;j++) L->solution()[meshelem[i].p[j]]=0;
 		}
 	}
 
