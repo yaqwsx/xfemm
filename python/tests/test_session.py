@@ -80,3 +80,14 @@ def test_force_per_selection_and_circuit_props():
         session.groupselectblock([3, 4], clearselected=True)
         assert flux.real > 0
         assert flux.real == pytest.approx(session.blockintegral(0).real / 2.0, rel=1e-9)
+
+
+def test_stress_tensor_rejects_selection_touching_non_air():
+    # NdFeB magnet (group 1) glued to a steel block (group 2), periodic box.
+    with FemmSession(Path(__file__).parent / "data" / "magnet_on_steel.fem") as session:
+        session.solve()
+        session.groupselectblock(1, clearselected=True)
+        with pytest.raises(RuntimeError, match="touches a non-air region"):
+            session.blockintegral(18)
+        session.groupselectblock([1, 2], clearselected=True)
+        assert abs(session.blockintegral(18).real) < 0.5  # whole body: ~0 (mesh noise)
